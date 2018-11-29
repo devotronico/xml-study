@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <p:FatturaElettronica>
   <FatturaElettronicaHeader>
-
+<!-- HEAD
+Head Trasmissione
+ -->
     <DatiTrasmissione>
       <IdTrasmittente>
         <IdPaese>IT</IdPaese>
         <IdCodice>01234567890</IdCodice>
       </IdTrasmittente>
-      <ProgressivoInvio>00001</ProgressivoInvio>
-      <FormatoTrasmissione>FPA12</FormatoTrasmissione>
-      <CodiceDestinatario>AAAAAA</CodiceDestinatario>
     </DatiTrasmissione>
-
-
+<!-- HEAD
+Head Mittente
+ -->
     <CedentePrestatore>
       <DatiAnagrafici>CedentePrestatore
         <IdFiscaleIVA>

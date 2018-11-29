@@ -2,7 +2,7 @@
 
 echo 'Test';
 
-class FatturaElettronica {
+class FatturaElettronica{
 
 // HEADER
 // CedentePrestatore
@@ -120,11 +120,40 @@ $this->xmlString .='</FatturaElettronicaBody></p:FatturaElettronica>';
 
 
 
+public function view(){
+
+    header('Content-Type: application/xml');
+    $doc = new DOMDocument();
+    $doc->load($this->fileURL);
+    echo $doc->saveXML();
+}
 
 
 
 
-} // CHIUDE Classe FatturaElettronica
+public function salva($url = "", $filename = null){
+    
+    if(strlen($this->xmlString) <= 0) 
+        return false;
+    /*Crea file XML da stringa*/
+    $dom = new DOMDocument('1.0','utf-8');
+    $dom->loadXml($this->xmlString);
+    
+    if(is_null($filename))
+      $filename = $this->idPaese.$this->idCodice.'_'.$this->progressivoInvio.'.xml';
+    $this->fileURL = $url . $filename;
+
+    $formattedXml = new DOMDocument('1.0','utf-8');
+    $formattedXml->preserveWhiteSpace = false; 
+    $formattedXml->formatOutput = true; 
+    $formattedXml->loadXML($dom->saveXML()); 
+    $formattedXml->save($this->fileURL); 
+}
+
+
+
+
+}
 
 
 
@@ -132,11 +161,22 @@ $this->xmlString .='</FatturaElettronicaBody></p:FatturaElettronica>';
 class CedentePrestatore extends BaseObjectToXML{
 
 	public $DatiAnagrafici;
+	public $Sede;
+	public $StabileOrganizzazione;
+	public $IscrizioneREA;
+	public $Contatti;
+	public $RiferimentoAmministrazione;
 
-
-	function __construct($datiAnagrafici){
+	function __construct($datiAnagrafici, $sede, $stabileOrganizzazione = null, $iscrizioneREA = null, $contatti = null, $riferimentoAmministrazione = null){
 
 		$this->DatiAnagrafici = $datiAnagrafici;
+		if(!is_null($sede) && $sede instanceof Sede)
+			$this->Sede = $sede;
+		if(!is_null($stabileOrganizzazione) && !$stabileOrganizzazione instanceof Sede)
+			$this->StabileOrganizzazione = $stabileOrganizzazione;
+		if(!is_null($iscrizioneREA) && $sede instanceof IscrizioneREA)
+			$this->IscrizioneREA = $iscrizioneREA;
+		$this->RiferimentoAmministrazione = $riferimentoAmministrazione;
 		
 	}
 
@@ -280,7 +320,7 @@ class BaseObjectToXML{
 
 		$xmlString = '';
 		foreach($this as $tag => $value){
-
+			
 			if(is_null($value) || empty($value))
 				continue;
 			
