@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:FatturaElettronica>
+  <FatturaElettronicaHeader>
+
+    <DatiTrasmissione>
+      <IdTrasmittente>
+        <IdPaese>IT</IdPaese>
+        <IdCodice>01234567890</IdCodice>
+      </IdTrasmittente>
+      <ProgressivoInvio>00001</ProgressivoInvio>
+      <FormatoTrasmissione>FPA12</FormatoTrasmissione>
+      <CodiceDestinatario>AAAAAA</CodiceDestinatario>
+    </DatiTrasmissione>
+
+
+    <CedentePrestatore>
+      <DatiAnagrafici>CedentePrestatore
+        <IdFiscaleIVA>
+          <IdPaese>IT</IdPaese>
+          <IdCodice>01234567890</IdCodice>
+        </IdFiscaleIVA>
+      </DatiAnagrafici>
+    </CedentePrestatore>
+  </FatturaElettronicaHeader>
+
+
+
+
+	<!-- BODY
+	DatiGenerale; [W]
+	private $DatiBeniServizi = [];
+	private $DatiVeicoli = null;
+	private $DatiPagamento = null;
+	private $Allegati = null;
+  -->
+  <FatturaElettronicaBody>
+    <DatiGenerali>
+      <DatiGeneraliDocumento>
+        <Numero>123</Numero>
+      </DatiGeneraliDocumento>
+    </DatiGenerali>
+  </FatturaElettronicaBody>
+
+</p:FatturaElettronica>
